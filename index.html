@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apple Music - Web Player</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="main.dart.js"></script>
+</head>
+<body>
+
+<!-- ANIMASI PEMBUKA (SPLASH SCREEN) -->
+<div id="splash-screen">
+  <div class="splash-content">
+    <div class="splash-icon">🎵</div>
+    <h1 class="splash-title">WELCOME PLAYER</h1>
+    <p class="splash-sub">Menyiapkan Koleksi Musik Favoritmu...</p>
+  </div>
+</div>
+
+<div class="container">
+  <h1>MY MUSIC PLAYER</h1>
+  <p class="subtitle">Pilih lagu favoritmu dari kategori di bawah ini:</p>
+
+  <!-- SEARCH BAR -->
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="🔍 Cari judul atau penyanyi..." />
+  </div>
+
+  <!-- KATEGORI 1: GAMON -->
+  <div class="kategori-section">
+    <h2>💔 Lagu Gamon</h2>
+    <div class="button-group">
+      <button class="btn-lagu"
+        data-judul="About You"
+        data-penyanyi="THE 1975"
+        data-src="lagu/gamon/about_you.mp3"
+        data-cover="https://i.scdn.co/image/ab67616d0000b2731f44db452a68e229650a302c"
+        data-lirik="&quot;Do you think I have forgotten about you?&quot;">
+        About You - THE 1975
+      </button>
+
+      <button class="btn-lagu"
+        data-judul="I'm The Man Who Can't Be Moved"
+        data-penyanyi="The Script"
+        data-src="lagu/gamon/the_man.mp3"
+        data-cover="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300&q=80"
+        data-lirik="&quot;Cause if one day you wake up and find that you're missing me...&quot;">
+        I'm The Man Who Can't Be Moved - The Script
+      </button>
+    </div>
+  </div>
+
+  <!-- KATEGORI 2: POP & GALAU -->
+  <div class="kategori-section">
+    <h2>✨ Pop & Galau</h2>
+    <div class="button-group">
+      <button class="btn-lagu"
+        data-judul="Blank Space"
+        data-penyanyi="Taylor Swift"
+        data-src="lagu/pop_galau/blank_space.mp3"
+        data-cover="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&q=80"
+        data-lirik="&quot;Got a long list of ex-lovers, they'll tell you I'm insane&quot;">
+        Blank Space - Taylor Swift
+      </button>
+
+      <button class="btn-lagu"
+        data-judul="Lose My Mind"
+        data-penyanyi="Don Toliver"
+        data-src="lagu/pop_galau/lose_my_mind.mp3"
+        data-cover="https://i.scdn.co/image/ab67616d0000b273d4c0243b55cdf7394323e710"
+        data-lirik="&quot;I don't wanna lose my mind, running through the night...&quot;">
+        Lose My Mind - Don Toliver
+      </button>
+    </div>
+  </div>
+
+  <!-- KATEGORI 3: SANTAI -->
+  <div class="kategori-section">
+    <h2>☕ Santai</h2>
+    <div class="button-group">
+      <button class="btn-lagu"
+        data-judul="Anti Hero"
+        data-penyanyi="Taylor Swift"
+        data-src="lagu/santai/Anti_Hero.mp3"
+        data-cover="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=300&q=80"
+        data-lirik="&quot;It's me, hi, I'm the problem, it's me&quot;">
+        Anti Hero - Taylor Swift
+      </button>
+    </div>
+  </div>
+
+  <!-- KATEGORI 4: STRES -->
+  <div class="kategori-section">
+    <h2>😮‍💨 Stres</h2>
+    <div class="button-group">
+      <button class="btn-lagu"
+        data-judul="Take A Chance With Me"
+        data-penyanyi="Niki"
+        data-src="lagu/stress/take_a_chance.mp3"
+        data-cover="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&q=80"
+        data-lirik="&quot;Take a chance with me, ooh I want you to be mine&quot;">
+        Take A Chance With Me - Niki
+      </button>
+    </div>
+  </div>
+
+  <!-- PLAYER CARD MODERN -->
+  <div class="player-card">
+    
+    <!-- COVER ART / VINYL ANIMATION -->
+    <div class="cover-wrapper">
+      <img id="cover-art" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&q=80" alt="Album Cover" class="cover-art" />
+    </div>
+
+    <div class="song-header">
+      <h2 id="judul">Pilih Lagu</h2>
+      <p id="penyanyi">Klik salah satu tombol di atas untuk memutar</p>
+    </div>
+
+    <!-- Animation Waveform -->
+    <div id="waveform-box" class="waveform">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <!-- Highlight Lirik Box -->
+    <p id="lirik" class="lirik-box">-</p>
+
+    <!-- Tombol Navigasi Kontrol Kustom -->
+    <div class="controls-row">
+      <button id="btn-shuffle" class="btn-control" title="Acak Lagu">🔀 Shuffle</button>
+      <button id="btn-prev" class="btn-control" title="Lagu Sebelumnya">⏮ Prev</button>
+      <button id="btn-next" class="btn-control" title="Lagu Selanjutnya">Next ⏭</button>
+      <button id="btn-repeat" class="btn-control" title="Mode Pengulangan">🔁 <span id="repeat-label">Repeat: OFF</span></button>
+    </div>
+
+    <!-- Controls Audio -->
+    <audio id="audio-player" controls></audio>
+  </div>
+
+</div>
+
+</body>
+</html>
